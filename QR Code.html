@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #6dd5ed);
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+        }
+        input, button {
+            display: block;
+            margin: 10px auto;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: 2px solid #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #qrcode {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        #download {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            input, button {
+                padding: 10px;
+                font-size: 14px;
+            }
+            #qrcode canvas {
+                width: 350px !important;
+                height: 350px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Free QR Code Generator</h1>
+        <p>Enter your details below and generate a QR Code.</p>
+        
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="text" id="company" placeholder="Company Name">
+        <input type="text" id="phone" placeholder="Phone Number">
+        <input type="email" id="email" placeholder="Email Address">
+        <input type="url" id="facebook" placeholder="Facebook Profile URL">
+        <input type="url" id="linkedin" placeholder="LinkedIn Profile URL">
+        
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <div id="qrcode"></div>
+        <a id="download" download="qrcode.png">Download QR Code</a>
+    </div>
+    
+    <script>
+        function generateQRCode() {
+            var name = document.getElementById("name").value;
+            var company = document.getElementById("company").value;
+            var phone = document.getElementById("phone").value;
+            var email = document.getElementById("email").value;
+            var facebook = document.getElementById("facebook").value;
+            var linkedin = document.getElementById("linkedin").value;
+            
+            var qrData = `MECARD:N:${name};ORG:${company};TEL:${phone};EMAIL:${email};URL:${facebook};URL:${linkedin};;`;
+            
+            document.getElementById("qrcode").innerHTML = "";
+            var qr = new QRCode(document.getElementById("qrcode"), {
+                text: qrData,
+                width: 350,
+                height: 350
+            });
+            
+            setTimeout(() => {
+                var canvas = document.querySelector("#qrcode canvas");
+                var downloadLink = document.getElementById("download");
+                downloadLink.href = canvas.toDataURL("image/png");
+                downloadLink.style.display = "block";
+            }, 500);
+        }
+    </script>
+</body>
+</html>
