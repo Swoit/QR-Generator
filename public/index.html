@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe AI Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to AI Cafe</h1>
+    </header>
+    <section id="signup">
+        <h2>Join our loyalty program</h2>
+        <form id="signup-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <select id="preference">
+                <option value="coffee">Coffee Lover</option>
+                <option value="tea">Tea Lover</option>
+                <option value="dessert">Dessert Fan</option>
+            </select>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div id="offer" class="hidden"></div>
+    </section>
+
+    <section id="chat">
+        <h2>Ask our AI assistant</h2>
+        <div id="messages"></div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Ask anything..." required autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <section id="recommendations">
+        <h2>Recommendations</h2>
+        <button id="get-recs">Get Recommendations</button>
+        <ul id="rec-list"></ul>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
